@@ -1,3 +1,47 @@
+# Kira specific information -- PLEASE keep up to date
+
+### Changes made
+
+This is a fork of the `RecordRTC` library where we needed to make a couple of changes
+
+- Allow the library to take in and pass along the video bitrate to record in
+  - Allows us to use whatever bitrate we want to better control video sizes generated
+  - See
+    - [CORE-1839](https://kiratalent.atlassian.net/browse/CORE-1839)
+    - [Diff](https://github.com/kira/RecordRTC/pull/2)
+
+### Making Changes
+
+- Clone the repository
+- Node 18 is required to run the project
+  - `nvm install 18 && nvm use 18`
+- Install the dependencies
+  - `npm install`
+
+### Testing the changes in Nectar
+- Make your changes
+- Run the build
+  - `grunt`
+- Copy and overwrite the copy of `RecordRTC.js` and `RecordRTC.min.js` in the root folder to `<nectar_home>node_modules/recordrtc/RecordRTC.js`
+- Restart the React dev server
+
+### Cutting a new release
+- Include the modified files `RecordRTC.js` and `RecordRTC.min.js` from running the build in your PR
+  - Run the build with `grunt`
+- Get your PR merged
+- From your local machine, run the following on a new branch created from `main`
+```shell
+$ npm version patch
+$ git push 
+$ git push --tags
+```
+- Create a new PR with the changes
+- Merge your PR
+- Update the releases page on Github
+- You can now reference the new code in `package.json` files like so
+  - `github:kira/RecordRTC#<git_reference>`
+
+
 # RecordRTC.js | [Live Demo](https://www.webrtc-experiment.com/RecordRTC/)
 
 **WebRTC JavaScript Library for Audio+Video+Screen+Canvas (2D+3D animation) Recording**
